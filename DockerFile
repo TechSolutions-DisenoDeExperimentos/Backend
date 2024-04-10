@@ -1,0 +1,25 @@
+# Usa una imagen base de Java 11
+FROM openjdk:11-jdk-slim AS build
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo pom.xml y descarga las dependencias de Maven
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copia el resto de los archivos y realiza el proceso de construcción
+COPY src ./src
+RUN mvn package -DskipTests
+
+# Etapa de construcción final
+FROM openjdk:11-jre-slim
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo JAR construido desde la etapa anterior
+COPY --from=build /app/target/TuCine-0.0.1-SNAPSHOT.jar .
+
+# Comando para ejecutar la aplicación Spring Boot
+CMD ["java", "-jar", "TuCine-0.0.1-SNAPSHOT.jar"]
