@@ -1,6 +1,5 @@
 package com.upc.TuCine.TuCine.dto.save.Film;
 
-import com.upc.TuCine.TuCine.model.ContentRating;
 import lombok.Data;
 
 @Data

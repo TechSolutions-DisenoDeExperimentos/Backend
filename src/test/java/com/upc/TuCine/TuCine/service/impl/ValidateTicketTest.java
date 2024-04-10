@@ -5,16 +5,14 @@ import com.upc.TuCine.TuCine.model.Showtime;
 import com.upc.TuCine.TuCine.shared.exception.ValidationException;
 import com.upc.TuCine.TuCine.user.domain.model.User;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.*;
 
-@SpringBootTest
-public class TicketServiceImplTest {
+
+public class ValidateTicketTest {
 
     @Test
-    public void validateTicket() {
-        // Caso de prueba: Todos los campos son válidos
+    public void testValidTicket() {
         TicketDto validTicket = new TicketDto();
         validTicket.setUser(new User());
         validTicket.setShowtime(new Showtime());
@@ -25,8 +23,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             fail("No se esperaba una excepción para un ticket válido");
         }
+    }
 
-        // Caso de prueba: Falta el usuario
+    @Test()
+    public void testNullUserTicket() {
         TicketDto nullUserTicket = new TicketDto();
         nullUserTicket.setShowtime(new Showtime());
         nullUserTicket.setNumberSeats(5);
@@ -37,8 +37,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             // La excepción esperada se lanzó, lo que es correcto
         }
+    }
 
-        // Caso de prueba: Falta el showtime
+    @Test
+    public void testNullShowtimeTicket() {
         TicketDto nullShowtimeTicket = new TicketDto();
         nullShowtimeTicket.setUser(new User());
         nullShowtimeTicket.setNumberSeats(5);
@@ -49,8 +51,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             // La excepción esperada se lanzó, lo que es correcto
         }
+    }
 
-        // Caso de prueba: Número de asientos cero
+    @Test
+    public void testZeroSeatsTicket() {
         TicketDto zeroSeatsTicket = new TicketDto();
         zeroSeatsTicket.setUser(new User());
         zeroSeatsTicket.setShowtime(new Showtime());
@@ -62,8 +66,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             // La excepción esperada se lanzó, lo que es correcto
         }
+    }
 
-        // Caso de prueba: Número de asientos nulo
+    @Test
+    public void testNullSeatsTicket() {
         TicketDto nullSeatsTicket = new TicketDto();
         nullSeatsTicket.setUser(new User());
         nullSeatsTicket.setShowtime(new Showtime());
@@ -75,8 +81,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             // La excepción esperada se lanzó, lo que es correcto
         }
+    }
 
-        // Caso de prueba: Precio total negativo
+    @Test
+    public void testNegativePriceTicket() {
         TicketDto negativePriceTicket = new TicketDto();
         negativePriceTicket.setUser(new User());
         negativePriceTicket.setShowtime(new Showtime());
@@ -88,8 +96,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             // La excepción esperada se lanzó, lo que es correcto
         }
+    }
 
-        // Caso de prueba: Precio total cero
+    @Test
+    public void testZeroPriceTicket() {
         TicketDto zeroPriceTicket = new TicketDto();
         zeroPriceTicket.setUser(new User());
         zeroPriceTicket.setShowtime(new Showtime());
@@ -101,8 +111,10 @@ public class TicketServiceImplTest {
         } catch (ValidationException e) {
             // La excepción esperada se lanzó, lo que es correcto
         }
+    }
 
-        // Caso de prueba: Precio total nulo
+    @Test
+    public void testNullPriceTicket() {
         TicketDto nullPriceTicket = new TicketDto();
         nullPriceTicket.setUser(new User());
         nullPriceTicket.setShowtime(new Showtime());
@@ -115,4 +127,5 @@ public class TicketServiceImplTest {
             // La excepción esperada se lanzó, lo que es correcto
         }
     }
+
 }

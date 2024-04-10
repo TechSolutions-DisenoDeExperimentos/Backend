@@ -153,7 +153,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
 
-    void validateFilm(FilmDto film) {
+    public void validateFilm(FilmDto film) {
 
         if(film.getTitle() == null || film.getTitle().isEmpty()) {
             throw new ValidationException("El nombre de la película no puede estar vacío");
@@ -172,7 +172,7 @@ public class FilmServiceImpl implements FilmService {
         }
 
     }
-    void existsFilmByTitle(String title) {
+    public void existsFilmByTitle(String title) {
         if (filmRepository.existsFilmByTitle(title)) {
             throw new ValidationException("No se puede agregar la película, puesto que una con su mismo titulo ya existe");
         }
