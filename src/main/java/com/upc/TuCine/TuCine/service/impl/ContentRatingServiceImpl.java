@@ -71,11 +71,11 @@ public class ContentRatingServiceImpl implements ContentRatingService {
         if (contentRatingDto1 == null) {
             return null;
         }
-        contentRatingDto.setName(contentRatingDto1.getName());
-        contentRatingDto.setDescription(contentRatingDto1.getDescription());
+        contentRatingDto1.setName(contentRatingDto.getName());
+        contentRatingDto1.setDescription(contentRatingDto.getDescription());
 
-        validateContentRating(contentRatingDto);
-        ContentRating contentRating = DtoToEntity(contentRatingDto);
+        validateContentRating(contentRatingDto1);
+        ContentRating contentRating = DtoToEntity(contentRatingDto1);
         return EntityToDto(contentRatingRepository.save(contentRating));
     }
 
