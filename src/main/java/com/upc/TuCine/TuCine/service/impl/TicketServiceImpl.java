@@ -51,6 +51,16 @@ public class TicketServiceImpl implements TicketService {
                 .map(this::EntityToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TicketDto> getAllTicketsByUserId(Integer UserId) {
+        List<Ticket> tickets = ticketRepository.findByUserId(UserId);
+        return tickets.stream()
+                .map(this::EntityToDto)
+                .collect(Collectors.toList());
+    }
+
+
     @Override
     public TicketDto createTicket(TicketSaveDto ticketSaveDto) {
 

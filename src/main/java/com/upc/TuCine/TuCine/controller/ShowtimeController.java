@@ -109,11 +109,10 @@ public class ShowtimeController {
                     )
             }
     )
-
     public ResponseEntity<ShowtimeDto> createShowtime(@RequestBody ShowtimeDto showtimeDto) {
         ShowtimeDto createdShowtimeDto = showtimeService.createShowtime(showtimeDto);
         return new ResponseEntity<>(createdShowtimeDto, HttpStatus.CREATED);
-    }
+    } //se debe asignar este formato:  "playTime": "12:30", a hora ;-;
 
 
     //URL: http://localhost:8080/api/TuCine/v1/showtimes/{id}

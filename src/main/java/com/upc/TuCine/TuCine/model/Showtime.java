@@ -26,7 +26,7 @@ public class Showtime {
     private Integer id;
 
     @Column(name = "play_date", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate playDate;
 
     @Column(name = "play_time", nullable = false)
