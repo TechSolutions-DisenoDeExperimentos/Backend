@@ -57,6 +57,30 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.getAllTickets(), HttpStatus.OK);
     }
 
+    //URL: http://localhost:8080/api/TuCine/v1/tickets/{id}
+    //Method: GET
+    @Transactional(readOnly = true)
+    @GetMapping("/tickets/{id}")
+    @Operation(summary = "Obtener un ticket mediante su id")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Se obtuvo el ticket",
+                            content = {
+                                    @Content(mediaType = "application/json",
+                                            schema= @Schema(implementation = ShowtimeDto.class))
+                            }),
+                    @ApiResponse(responseCode = "404", description = "No se encontró el ticket",
+                            content = @Content)
+            }
+    )
+    public ResponseEntity<TicketDto> getTicketById(@PathVariable(value = "id") Integer id) {
+        TicketDto ticketDto = ticketService.getTicketById(id);
+        if (ticketDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(ticketDto, HttpStatus.OK);
+    }
+
     //Method: GET
     @Transactional(readOnly = true)
     @GetMapping("/tickets/userid/{userId}")

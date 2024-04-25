@@ -60,6 +60,15 @@ public class TicketServiceImpl implements TicketService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public TicketDto getTicketById(Integer id) {
+        Ticket ticket = ticketRepository.findById(id).orElse(null);
+        if(ticket == null){
+            return null;
+        }
+        return EntityToDto(ticket);
+    }
+
 
     @Override
     public TicketDto createTicket(TicketSaveDto ticketSaveDto) {
