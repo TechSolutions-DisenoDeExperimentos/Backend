@@ -1,7 +1,13 @@
 package com.upc.TuCine.TuCine.controller;
 
 import com.upc.TuCine.TuCine.dto.AvailableFilmDto;
+import com.upc.TuCine.TuCine.dto.BusinessDto;
 import com.upc.TuCine.TuCine.service.AvailableFilmService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +33,26 @@ public class AvailableFilmController {
     @GetMapping("/availableFilms")
     public ResponseEntity<List<AvailableFilmDto>> getAllAvailableFilms() {
         return new ResponseEntity<>(availableFilmService.getAllAvailableFilms(), HttpStatus.OK);
+    }
+
+    @Transactional(readOnly = true)
+    @GetMapping("/availableFilms/{id}")
+    @Operation(summary = "Obtener un availableFilm por su id")
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200", description = "Se obtuvo el availableFilm",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema= @Schema(implementation = BusinessDto.class))
+                    }),
+            @ApiResponse(responseCode = "404", description = "No se encontro el availableFilm",
+                    content = @Content)
+    })
+    public ResponseEntity<AvailableFilmDto> getAvailableFilmById(@PathVariable(value = "id") Integer id) {
+        AvailableFilmDto availableFilmDto = availableFilmService.getAvailableFilmById(id);
+        if (availableFilmDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(availableFilmDto, HttpStatus.OK);
     }
 
     //URL: http://localhost:8080/api/TuCine/v1/availableFilms

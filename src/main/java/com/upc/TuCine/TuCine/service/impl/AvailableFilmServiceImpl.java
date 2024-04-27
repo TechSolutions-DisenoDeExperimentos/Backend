@@ -114,6 +114,14 @@ public class AvailableFilmServiceImpl implements AvailableFilmService {
     }
 
     @Override
+    public AvailableFilmDto getAvailableFilmById(Integer id) {
+        AvailableFilm availableFilm = availableFilmRepository.findById(id).orElse(null);
+        if (availableFilm == null) {
+            return null;
+        }return EntityToDto(availableFilm);
+    }
+
+    @Override
     public List<BusinessDto> getBusinessesByFilmId(Integer filmId) {
         List<AvailableFilm> availableFilms = availableFilmRepository.findAllByFilmId(filmId);
         return availableFilms.stream()
