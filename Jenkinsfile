@@ -42,7 +42,7 @@ pipeline {
         steps {
           script {
             echo 'Building..'
-            execute("mvn package -D"maven.test.skip"")
+            execute("mvn package -D\"maven.test.skip\"")
           }
         }
     }
