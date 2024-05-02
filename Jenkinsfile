@@ -8,47 +8,59 @@ pipeline {
   stages {
     stage('Clean') {
         steps {
+          script {
             echo 'Cleaning..'
             execute("mvn clean")
+          }
         }
     }
     stage('Test') {
         steps {
+          script {
             echo 'Testing..'
             execute("mvn test")
+          }
         }
     }
     stage('Report') {
         steps {
+          script {
             echo 'Reporting with jacoco..'
             execute("mvn jacoco:report")
+          }
         }
     }
     stage('Sonar') {
         steps {
+          script {
             echo 'Sonar report..'
             execute("mvn sonar:sonar")
+          }
         }
     }
     stage('Build') {
         steps {
+          script {
             echo 'Building..'
             execute("mvn package -D"maven.test.skip"")
+          }
         }
     }
     stage('Deploy') {
         steps {
+          script {
             echo 'Deploying....'
             execute("java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar")
+          }
         }
     }
   }
 }
 
-def execute(def args){
+def execute(command){
   if(isUnix()){
-    sh args
+    sh "${command}"
   }else {
-    bat args
+    bat "${command}"
   }
 }
