@@ -1,13 +1,9 @@
-def execute(def args){
-  if(isUnix()){
-    sh args
-  }else {
-    bat args
-  }
-}
-
 pipeline {
-  agent: any,
+  agent any
+  tools {
+    maven 'MAVEN_3_9_6'
+    jdk 'JDK_1_11'
+  }
 
   stages {
     stage('Clean') {
@@ -46,5 +42,13 @@ pipeline {
             execute("java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar")
         }
     }
+  }
+}
+
+def execute(def args){
+  if(isUnix()){
+    sh args
+  }else {
+    bat args
   }
 }
