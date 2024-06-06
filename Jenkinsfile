@@ -34,7 +34,7 @@ pipeline {
         steps {
           script {
             echo 'Sonar report..'
-            execute("mvn sonar:sonar -Dsonar.host.url=\"http://sonarqube:9000\"")
+            execute("mvn sonar:sonar -Dsonar.host.url=\"http://sonarqube:9000\" -Dsonar.login=admin -D sonar.password=admin123")
           }
         }
     }
