@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {
     maven 'MAVEN_3_9_6'
-    jdk 'JDK_1_11'
+    jdk 'JDK_1_17'
   }
 
   stages {
@@ -50,7 +50,7 @@ pipeline {
         steps {
           script {
             echo 'Deploying....'
-            execute("java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar &")
+            execute("java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar >./log/output.log 2>./log/errors.log &")
           }
         }
     }
