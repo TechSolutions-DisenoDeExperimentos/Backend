@@ -1,6 +1,8 @@
 #!/bin/bash
 
-nohup java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar &
+java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar &>/tmp/output.log &
 FOO_PID=$!
 echo "PID: $FOO_PID"
 echo $(jobs)
+sleep 10
+cat /tmp/output.log
