@@ -51,7 +51,7 @@ pipeline {
           script {
             echo 'Deploying....'
             execute("chmod +x ./deploy.sh")
-            "./deploy.sh"
+            nohup java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar &
           }
         }
     }
