@@ -51,7 +51,7 @@ pipeline {
           script {
             echo 'Deploying....'
             execute("chmod +x ./deploy.sh")
-            execute("")
+            ./deploy.sh
           }
         }
     }
