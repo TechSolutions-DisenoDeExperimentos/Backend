@@ -42,5 +42,11 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "Showtime_id", nullable = false, foreignKey = @ForeignKey(name = "FK_TICKET_SHOWTIME"))
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Showtime showtime;
+    private Showtime showtime;     
+    
+    public void validateShowtime(Showtime showtime){
+        if(showtime.getCapacity() < this.getNumberSeats()){
+            throw new Error("No se puede crear un ticket con capacidad mayor al del show");
+        }
+    }
 }

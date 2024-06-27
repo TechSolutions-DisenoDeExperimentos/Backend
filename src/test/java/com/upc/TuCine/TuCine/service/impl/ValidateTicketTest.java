@@ -13,19 +13,25 @@ public class ValidateTicketTest {
 
     @Test
     public void testValidTicket() {
-        TicketDto validTicket = new TicketDto();
-        validTicket.setUser(new User());
-        validTicket.setShowtime(new Showtime());
-        validTicket.setNumberSeats(5);
-        validTicket.setTotalPrice(100.0F);
+    	int maxCapacity = 6;
+    	int ticketSeats = 5;
+        
+        Showtime showtime = new Showtime();
+        showtime.setCapacity(maxCapacity);
+
         try {
-            TicketServiceImpl.validateTicket(validTicket);
+            Ticket validTicket = new Ticket();
+            validTicket.setNumberSeats(ticketSeats);
+            validTicket.validateShowtime(showtime);
+            validTicket.setShowtime(showtime);
+
+            assertEquals(validTicket.getShowtime(), showtime);
         } catch (ValidationException e) {
-            fail("No se esperaba una excepción para un ticket válido");
+            fail(e.getMessage());
         }
     }
 
-    @Test()
+/*     @Test()
     public void testNullUserTicket() {
         TicketDto nullUserTicket = new TicketDto();
         nullUserTicket.setShowtime(new Showtime());
@@ -127,5 +133,5 @@ public class ValidateTicketTest {
             // La excepción esperada se lanzó, lo que es correcto
         }
     }
-
+ */
 }

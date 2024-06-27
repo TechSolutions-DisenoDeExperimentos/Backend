@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -49,4 +50,11 @@ public class Film {
     @JsonIgnore
     @ManyToMany
     private List<Category> categories;
+
+    public void validateForCopyright(int year){
+        if(year >= LocalDate.now().getYear() - 2){
+            throw new Error("No se puede crear este film por temas de precaucion hacia derechos de autor");
+        }
+    }
+
 }
