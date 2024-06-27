@@ -2,6 +2,7 @@ package com.upc.TuCine.TuCine.service.impl;
 
 import com.upc.TuCine.TuCine.dto.TicketDto;
 import com.upc.TuCine.TuCine.model.Showtime;
+import com.upc.TuCine.TuCine.model.Ticket;
 import com.upc.TuCine.TuCine.shared.exception.ValidationException;
 import com.upc.TuCine.TuCine.user.domain.model.User;
 import org.junit.jupiter.api.Test;

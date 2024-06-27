@@ -2,6 +2,7 @@ package com.upc.TuCine.TuCine.service.impl;
 
 import com.upc.TuCine.TuCine.dto.FilmDto;
 import com.upc.TuCine.TuCine.model.ContentRating;
+import com.upc.TuCine.TuCine.model.Film;
 import com.upc.TuCine.TuCine.shared.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
