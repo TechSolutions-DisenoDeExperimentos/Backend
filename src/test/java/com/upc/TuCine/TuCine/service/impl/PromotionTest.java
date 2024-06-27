@@ -52,4 +52,38 @@ public class PromotionTest {
         assertEquals(1, promotionService.getAllPromotions().size());
     }
 
+    // Validar la creaci[on de promociones teniendo como regla una promocion por semana
+    @Test
+    public void testMaxPromotionsPerWeek(){
+        // Creacion de varias promociones
+        PromotionSaveDto promotion1 = new PromotionSaveDto();
+        PromotionSaveDto promotion2 = new PromotionSaveDto();
+        PromotionSaveDto promotion3 = new PromotionSaveDto();
+        PromotionSaveDto promotion4 = new PromotionSaveDto();
+        PromotionSaveDto promotion5 = new PromotionSaveDto();
+
+        // establecer las fechas pra las promociones
+        promotion1.setStartDate(LocalDate.now());
+        promotion1.setEndDate(LocalDate.now().plusDays(7));
+        promotion2.setStartDate(LocalDate.now().plusDays(1));
+        promotion2.setEndDate(LocalDate.now().plusDays(8));
+        promotion3.setStartDate(LocalDate.now().plusDays(2));
+        promotion3.setEndDate(LocalDate.now().plusDays(9));
+        promotion4.setStartDate(LocalDate.now().plusDays(3));
+        promotion4.setEndDate(LocalDate.now().plusDays(10));
+        promotion5.setStartDate(LocalDate.now().plusDays(4));
+        promotion5.setEndDate(LocalDate.now().plusDays(11));
+
+        // Verificar que solo se hatan creado tres promociones
+        assertEquals(3, promotionService.getAllPromotions().size());
+
+        // Verificacion que no se haya superado el limite de tres promociones por semana
+        //when(promotionService.createPromotion(promotion1)).thenReturn(promotion1);
+        //when(promotionService.createPromotion(promotion1)).thenReturn(promotion2);
+        //when(promotionService.createPromotion(promotion1)).thenReturn(promotion3);
+        //when(promotionService.createPromotion(promotion1)).thenReturn(promotion4);
+        //when(promotionService.createPromotion(promotion1)).thenReturn(promotion5);
+
+    }
+
 }
