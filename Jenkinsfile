@@ -51,7 +51,7 @@ pipeline {
           script {
             echo 'Deploying....'
             execute("chmod +x ./deploy.sh")
-            execute("./deploy.sh")
+            execute("")
           }
         }
     }
@@ -60,7 +60,7 @@ pipeline {
 
 def execute(command){
   if(isUnix()){
-    nohup sh "${command}"
+    sh "${command}"
   }else {
     bat "${command}"
   }
