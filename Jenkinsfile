@@ -50,7 +50,7 @@ pipeline {
         steps {
           script {
             echo 'Deploying....'
-            execute("java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar >/tmp/output.log 2>/tmp/errors.log &")
+            execute("java -jar ./target/TuCine-0.0.1-SNAPSHOT.jar &>/tmp/output.log &")
           }
         }
     }
