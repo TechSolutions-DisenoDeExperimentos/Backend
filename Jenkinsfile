@@ -60,7 +60,7 @@ pipeline {
 
 def execute(command){
   if(isUnix()){
-    sh "${command}"
+    nohup sh "${command}"
   }else {
     bat "${command}"
   }
